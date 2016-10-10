@@ -6,6 +6,7 @@ public class Percolation {
 	
 	private int[][] color;
 	private int[][] id;
+	private int[][] sizeTree;
 	private int black = 0;
 	private int white = 1;
 	public int numOfBlack;
@@ -16,6 +17,7 @@ public class Percolation {
 	public Percolation(int N) {
 		color = new int [N][N];
 		id = new int [N][N];
+		sizeTree = new int [N][N];
 		numOfBlack = N * N;
 		top = 0;
 		bottom = N * N - 1;
@@ -23,6 +25,7 @@ public class Percolation {
 			for(int j=0; j < N; j++) {
 				color[i][j] = black; //black -> block
 				id[i][j] = i * N + j; //initialize the Quick_Union_Tree
+				sizeTree[i][j] = 0;
 			}
 		}
 		//construct the top and bottom tree
@@ -95,6 +98,20 @@ public class Percolation {
 		int r1 = root(p, q, N);
 		int r2 = root(i, j, N);
 		id[r1/N][r1%N] = id[r2/N][r2%N];
+		
+//		//the improvement of Quick_Union
+//		if (p == i || q == j) 
+//			return;
+//		if (sizeTree[p][q] < sizeTree[i][j]) {
+//			id[r1/N][r1%N] = r2;
+//			sizeTree[i][j] += sizeTree[p][q]; 
+//		}
+//		else {
+//			id[r2/N][r2%N] = r1; 
+//			sizeTree[p][q] += sizeTree[i][j]; 
+//		} 
+		
+		
 	}
 	
 	public int generateRandomInt(int N) {
@@ -105,8 +122,8 @@ public class Percolation {
 	
 
 	public static void main(String[] args) {
-		int numOfTest = 100000; //how many times we do this test?
-		int N = 5; //the length of the big square.
+		int numOfTest = 10000; //how many times we do this test?
+		int N = 2; //the length of the big square.
 		Percolation p;
 		int numOfWhite;
 		
