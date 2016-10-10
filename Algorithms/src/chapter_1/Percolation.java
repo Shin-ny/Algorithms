@@ -37,7 +37,15 @@ public class Percolation {
 	//check percolation
 	public boolean checkPercolation(int N) {
 		for(int i=0; i < N; i++) {
-			if (root(0, i, N) == bottom || root(N-1, i, N) == top)
+			/* Don't understand why change
+			 * `if (root(0, i, N) == root(N-1, N-1, N) || root(N-1, i, N) == root(0, 0, N))`
+			 * to
+			 * `if (root(0, i, N) == bottom || root(N-1, i, N) == top)`
+			 * or
+			 * `if (root(0, i, N) == N * N - 1 || root(N-1, i, N) == 0)`
+			 * will break everything.
+			 * */
+			if (root(0, i, N) == root(N-1, N-1, N) || root(N-1, i, N) == root(0, 0, N))
 				return true;
 		}
 		return false;
@@ -97,14 +105,17 @@ public class Percolation {
 	
 
 	public static void main(String[] args) {
-		int numOfTest = 100; //how many times we do this test?
-		int N = 2; //the length of the big square.
+		int numOfTest = 100000; //how many times we do this test?
+		int N = 5; //the length of the big square.
+		Percolation p;
+		int numOfWhite;
+		
 		double [] testArray = new double[numOfTest];
 		
 		//do the test for numOfTest times
 		for(int i=0; i < numOfTest; i++) {
-			double numOfWhite = 0;
-			Percolation p = new Percolation(N);
+			numOfWhite = 0;
+			p = new Percolation(N);
 			while(!p.checkPercolation(N)){
 				p.blackToWhite(p.generateRandomInt(N), p.generateRandomInt(N), N);
 				numOfWhite++;

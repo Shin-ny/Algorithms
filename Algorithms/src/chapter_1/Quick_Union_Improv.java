@@ -15,7 +15,7 @@ public class Quick_Union_Improv {
 	
 	private int root(int i) {
 		while(i != id[i]) {
-			//compress the tree everytime it finds connection
+			//compress the tree every time it finds connection
 			id[i] = id[id[i]];
 			
 			i = id[i];
