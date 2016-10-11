@@ -217,10 +217,10 @@ public class Percolation {
 		int N; //the length of the big square.
 		double result; //the final result of possibility
 		int signal; //determine which function to use to make union
-		System.out.println("This is a simulation of percolation."
-				+ "Enter two numbers\n"
-				+ "the first one is the length of squares\n"
-				+ "the second one is the time of the tests:");
+		System.out.println("This is a simulation of percolation.\n"
+				+ "Enter two numbers:\n"
+				+ "The first one is the length of squares\n"
+				+ "The second one is the time of the tests:");
 		
 		//standard input
 		Scanner in = new Scanner(System.in);
