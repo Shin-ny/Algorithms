@@ -9,7 +9,7 @@ public class Quick_Union_Improv {
 		sizeTree = new int[N];
 		for(int i=0; i<N; i++){
 			id[i] = i;
-			sizeTree[i] = 0;
+			sizeTree[i] = 1;
 		}
 	}
 	
