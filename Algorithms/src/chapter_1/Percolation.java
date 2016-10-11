@@ -1,6 +1,5 @@
 package chapter_1;
 
-import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,9 +16,11 @@ public class Percolation {
 	public static int originalQuickUnion = 0;
 	public static int weighedUnionImprov = 1;
 	public static int weighedCompressTreeQuickUnion = 2;
+	public static int N;
 	
 	//construct a N*N block where all the squares are black
 	public Percolation(int N) {
+		Percolation.N = N;
 		color = new int [N][N];
 		id = new int [N][N];
 		sizeTree = new int [N][N];
@@ -43,7 +44,7 @@ public class Percolation {
 
 	
 	//check percolation
-	public boolean checkPercolation(int N) {
+	public boolean checkPercolation() {
 		for(int i=0; i < N; i++) {
 			/* Don't understand why change
 			 * `if (root(0, i, N) == root(N-1, N-1, N) || root(N-1, i, N) == root(0, 0, N))`
@@ -53,14 +54,14 @@ public class Percolation {
 			 * `if (root(0, i, N) == N * N - 1 || root(N-1, i, N) == 0)`
 			 * will break everything.
 			 * */
-			if (root(0, i, N) == root(N-1, N-1, N) || root(N-1, i, N) == root(0, 0, N))
+			if (root(0, i) == root(N-1, N-1) || root(N-1, i) == root(0, 0))
 				return true;
 		}
 		return false;
 	}
 	
 	//find the root of a square
-	private int root(int i, int j, int N) {
+	private int root(int i, int j) {
 		int x;
 		while((i * N + j) != id[i][j]) {
 			x = id[i][j];
@@ -71,7 +72,7 @@ public class Percolation {
 	}
 	
 	//find the root of a square and compress the tree
-	private int rootAndCompress(int i, int j, int N) {
+	private int rootAndCompress(int i, int j) {
 		int x;
 		while((i * N + j) != id[i][j]) {
 			x = id[i][j];
@@ -83,11 +84,11 @@ public class Percolation {
 		return id[i][j];
 	}
 	
-	public void blackToWhite(int p, int q, int N, int signal){
+	public void blackToWhite(int p, int q, int signal){
 		
 		while(color[p][q] == white) {
-			p = generateRandomInt(N);
-			q = generateRandomInt(N);
+			p = generateRandomInt();
+			q = generateRandomInt();
 		}
 		
 		//change a square from black to white
@@ -95,42 +96,42 @@ public class Percolation {
 		if(signal == weighedUnionImprov) {
 			//make the union of this square with the surrounding white square
 			if(p > 0 && color[p-1][q] == white) {
-				union_weighed(p, q, p-1, q, N);
+				union_weighed(p, q, p-1, q);
 			}
 			if(p < N-1 && color[p+1][q] == white) {
-				union_weighed(p, q, p+1, q, N);
+				union_weighed(p, q, p+1, q);
 			}
 			if(q > 0 && color[p][q-1] == white) {
-				union_weighed(p, q, p, q-1, N);
+				union_weighed(p, q, p, q-1);
 			}
 			if(q < N-1 && color[p][q+1] == white) {
-				union_weighed(p, q, p, q+1, N);
+				union_weighed(p, q, p, q+1);
 			}
 		} else if (signal == originalQuickUnion){
 			if(p > 0 && color[p-1][q] == white) {
-				union(p, q, p-1, q, N);
+				union(p, q, p-1, q);
 			}
 			if(p < N-1 && color[p+1][q] == white) {
-				union(p, q, p+1, q, N);
+				union(p, q, p+1, q);
 			}
 			if(q > 0 && color[p][q-1] == white) {
-				union(p, q, p, q-1, N);
+				union(p, q, p, q-1);
 			}
 			if(q < N-1 && color[p][q+1] == white) {
-				union(p, q, p, q+1, N);
+				union(p, q, p, q+1);
 			}
 		} else {
 			if(p > 0 && color[p-1][q] == white) {
-				union_weighed_compress(p, q, p-1, q, N);
+				union_weighed_compress(p, q, p-1, q);
 			}
 			if(p < N-1 && color[p+1][q] == white) {
-				union_weighed_compress(p, q, p+1, q, N);
+				union_weighed_compress(p, q, p+1, q);
 			}
 			if(q > 0 && color[p][q-1] == white) {
-				union_weighed_compress(p, q, p, q-1, N);
+				union_weighed_compress(p, q, p, q-1);
 			}
 			if(q < N-1 && color[p][q+1] == white) {
-				union_weighed_compress(p, q, p, q+1, N);
+				union_weighed_compress(p, q, p, q+1);
 			}
 		}
 		
@@ -140,16 +141,16 @@ public class Percolation {
 		
 	}
 	
-	public void union(int p, int q, int i, int j, int N) {
-		int r1 = root(p, q, N);
-		int r2 = root(i, j, N);
+	public void union(int p, int q, int i, int j) {
+		int r1 = root(p, q);
+		int r2 = root(i, j);
 		id[r2/N][r2%N] = id[r1/N][r1%N]; 
 	}
 	
 	//Quick_Union with weighed tree
-	public void union_weighed(int p, int q, int i, int j, int N) {
-		int r1 = root(p, q, N);
-		int r2 = root(i, j, N);
+	public void union_weighed(int p, int q, int i, int j) {
+		int r1 = root(p, q);
+		int r2 = root(i, j);
 	
 		if (p == i && q == j) 
 			return;
@@ -164,9 +165,9 @@ public class Percolation {
 	}
 
 	//Quick_Union with weighed and compress tree
-	public void union_weighed_compress(int p, int q, int i, int j, int N) {
-		int r1 = rootAndCompress(p, q, N);
-		int r2 = rootAndCompress(i, j, N);
+	public void union_weighed_compress(int p, int q, int i, int j) {
+		int r1 = rootAndCompress(p, q);
+		int r2 = rootAndCompress(i, j);
 	
 		if (p == i && q == j) 
 			return;
@@ -181,7 +182,7 @@ public class Percolation {
 	}
 	
 	
-	public int generateRandomInt(int N) {
+	public int generateRandomInt() {
 		Random random = new Random();
 		int randomNumber = random.nextInt(N);
 		return randomNumber;
@@ -194,8 +195,8 @@ public class Percolation {
 		for(int i=0; i < numOfTest; i++) {
 			numOfWhite = 0;
 			p = new Percolation(N);
-			while(!p.checkPercolation(N)){
-				p.blackToWhite(p.generateRandomInt(N), p.generateRandomInt(N), N, signal);
+			while(!p.checkPercolation()){
+				p.blackToWhite(p.generateRandomInt(), p.generateRandomInt(), signal);
 				numOfWhite++;
 			}
 			testArray[i] = numOfWhite / (double)(N * N);
@@ -233,7 +234,6 @@ public class Percolation {
 				+ "2 -> Quick_union with weighed tree and compress the tree every time we touch it.\n"
 				+ "3 -> Ran the test under all the above three methods.");
 		signal = in.nextInt();
-		System.out.println("-> -> -> -> -> -> -> -> -> -> -> ->");
 		
 		if(signal != 0 && signal != 1 && signal != 2 && signal != 3) {
 			System.out.println("\nYou entered something I don't have :-( \n"
