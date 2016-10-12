@@ -82,6 +82,7 @@ public class ThreeSum {
 		// TODO Auto-generated method stub
 		long startTime;
 		long estimatedTime;
+		int signal;
 		Scanner in = new Scanner(System.in);
 		System.out.println("Compute how many times there is three distinct numbers that can sum to 0.\n"
 				+ "----------->\n"
@@ -95,7 +96,7 @@ public class ThreeSum {
 				+ "0 -> Yes\n"
 				+ "1 -> No\n");
 		
-		int signal = in.nextInt();
+		signal = in.nextInt();
 		
 		if(signal == 0) {
 			System.out.println("The random generated numbers: ");
@@ -104,16 +105,26 @@ public class ThreeSum {
 			}
 		}
 		
-		startTime = System.currentTimeMillis();
-		System.out.println("\nThe original one: " + ts.originalComupte());
-		estimatedTime = System.currentTimeMillis() - startTime;
-		System.out.println("The time elapse under the original one is: " + estimatedTime
-				+ "\n-----------------------------------------------------");
+		System.out.println("Do you want to skip the original ThreeSum solution?\n"
+				+ "(Cause it can took a lot of time!!)\n"
+				+ "0 -> Yes\n"
+				+ "1 -> No\n");
+		
+		signal = in.nextInt();
+		if(signal == 1) {
+			startTime = System.currentTimeMillis();
+			System.out.println("\nThe original one: " + ts.originalComupte());
+			estimatedTime = System.currentTimeMillis() - startTime;
+			System.out.println("The time elapse under the original one is: " + estimatedTime
+					+ "\n-----------------------------------------------------");
+		}
+		
 		
 		startTime = System.currentTimeMillis();
 		System.out.println("The improv one:" + ts.improvComupte());
 		estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println("The time elapse under the improved one is: " + estimatedTime);
+		in.close();
 	}
 
 }
