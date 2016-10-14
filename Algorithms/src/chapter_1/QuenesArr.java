@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class QuenesArr<Item> {
 	
-	
 	private Item[] s;
 	private int first = 0;
 	private int last = 0;
