@@ -41,7 +41,7 @@ public class QuenesArr<Item> {
 			copy[j] = s[i];
 			j++;
 		}
-		last = last - first;
+		last = j;
 		first = 0;
 		s = copy;
 	}
