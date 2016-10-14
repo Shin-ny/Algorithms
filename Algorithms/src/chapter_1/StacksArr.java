@@ -1,5 +1,6 @@
 package chapter_1;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class StacksArr<Item> {
@@ -38,6 +39,23 @@ public class StacksArr<Item> {
 		s = copy;
 	}
 	
+	public Iterator<Item> iterator() {
+		return new ReverseArrayIterator();
+	}
+	
+	private class ReverseArrayIterator implements Iterator<Item>{
+		private int i = N;
+		public boolean hasNext() {
+			return i > 0;
+		}
+		public void remove() {
+			
+		}
+		public Item next() {
+			return s[--i];
+		}
+	}
+	
 	public static void main(String[] args) {
 		StacksArr<String> sa = new StacksArr<String>();
 		Scanner in = new Scanner(System.in);
@@ -51,6 +69,16 @@ public class StacksArr<Item> {
 				sa.push(x);
 			}
 		}
+		
+		
+		//Implement the Iterable:
+		Iterator<String> i = sa.iterator();
+		while (i.hasNext()) {
+		 String s = i.next();
+		 System.out.println(s);
+		}
+		
+		
 		in.close();
 
 	}

@@ -1,5 +1,6 @@
 package chapter_1;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class QuenesArr<Item> {
@@ -45,6 +46,27 @@ public class QuenesArr<Item> {
 		first = 0;
 		s = copy;
 	}
+	
+	public Iterator<Item> iterator() {
+		return new ArrayIterator();
+	}
+	
+	public class ArrayIterator implements Iterator<Item> {
+		private int ilast = last;
+		private int ifirst = first;
+		public boolean hasNext() {
+			return (ilast - ifirst) != 0;
+		}
+		
+		public void remove() {
+			
+		}
+		
+		public Item next() {
+			return s[ifirst++];
+		}
+		
+	}
 
 	public static void main(String[] args) {
 		QuenesArr<String> q = new QuenesArr<String>();
@@ -59,6 +81,15 @@ public class QuenesArr<Item> {
 				q.enqueue(x);
 			}
 		}
+		
+		//Implement the Iterable:
+		Iterator<String> i = q.iterator();
+		while (i.hasNext()) {
+		 String s = i.next();
+		 System.out.println(s);
+		}
+		
+		
 		in.close();
 
 	}
