@@ -1,5 +1,6 @@
 package chapter_1;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Stacks<Item> {
@@ -28,6 +29,28 @@ public class Stacks<Item> {
 		return item;
 	}
 	
+	public Iterator<Item> iterator() {
+		return new ListeIterator();
+	}
+	
+	private class ListeIterator implements Iterator<Item> {
+		private Node current = first;
+		
+		public boolean hasNext() {
+			return current != null;
+		}
+		
+		public void remove() {
+			
+		}
+		
+		public Item next() {
+			Item item = current.item;
+			current = current.next;
+			return item;
+		}
+	}
+	
 	public static void main(String[] args) {
 		Stacks<String> sa = new Stacks<String>();
 		Scanner in = new Scanner(System.in);
@@ -41,6 +64,17 @@ public class Stacks<Item> {
 				sa.push(x);
 			}
 		}
+
+		
+		//Implement the Iterable:
+		Iterator<String> i = sa.iterator();
+		while (i.hasNext())
+		{
+		 String s = i.next();
+		 System.out.println(s);
+		}
+		
+		
 		in.close();
 	}
 

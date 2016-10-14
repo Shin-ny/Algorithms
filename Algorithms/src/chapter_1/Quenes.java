@@ -1,5 +1,6 @@
 package chapter_1;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Quenes<Item> {
@@ -36,6 +37,29 @@ public class Quenes<Item> {
 		}
 		return item;
 	}
+	
+	public Iterator<Item> iterator() {
+		return new ListeIterator();
+	}
+	
+	private class ListeIterator implements Iterator<Item> {
+		private Node current = first;
+		
+		public boolean hasNext() {
+			return current != null;
+		}
+		
+		public void remove() {
+			
+		}
+		
+		public Item next() {
+			Item item = current.item;
+			current = current.next;
+			return item;
+		}
+	}
+	
 	public static void main(String[] args) {
 		Quenes<String> q = new Quenes<String>();
 		Scanner in = new Scanner(System.in);
@@ -49,6 +73,17 @@ public class Quenes<Item> {
 				q.enqueue(x);
 			}
 		}
+		
+		
+		
+		//Implement the Iterable:
+		Iterator<String> i = q.iterator();
+		while (i.hasNext()) {
+		 String s = i.next();
+		 System.out.println(s);
+		}
+		
+		
 		in.close();
 
 	}
