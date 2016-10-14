@@ -1,5 +1,7 @@
 package chapter_1;
 
+import java.util.Scanner;
+
 public class Stacks<Item> {
 
 	private Node first = null;
@@ -27,7 +29,19 @@ public class Stacks<Item> {
 	}
 	
 	public static void main(String[] args) {
-
+		Stacks<String> sa = new Stacks<String>();
+		Scanner in = new Scanner(System.in);
+		String x;
+		while(in.hasNext()) {
+			x = in.next();
+			if(x.charAt(0) == '-') {
+				String result = sa.pop();
+				System.out.println(result);
+			} else {
+				sa.push(x);
+			}
+		}
+		in.close();
 	}
 
 }

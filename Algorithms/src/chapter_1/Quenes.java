@@ -1,5 +1,7 @@
 package chapter_1;
 
+import java.util.Scanner;
+
 public class Quenes<Item> {
 	
 	private Node first = null; 
@@ -35,7 +37,19 @@ public class Quenes<Item> {
 		return item;
 	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Quenes<String> q = new Quenes<String>();
+		Scanner in = new Scanner(System.in);
+		String x;
+		while(in.hasNext()) {
+			x = in.next();
+			if(x.charAt(0) == '-') {
+				String result = q.dequeue();
+				System.out.println(result);
+			} else {
+				q.enqueue(x);
+			}
+		}
+		in.close();
 
 	}
 
