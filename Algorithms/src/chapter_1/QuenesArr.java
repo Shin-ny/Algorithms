@@ -23,7 +23,6 @@ public class QuenesArr<Item> {
 		s[last] = item;
 		last++;
 		
-		
 	}
 	
 	public Item dequeue() {
