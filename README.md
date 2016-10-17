@@ -3,8 +3,18 @@ Notes and homework from reading Algorithms (4th edition)
 
 ## CHAPTER 1
 
+## 1.3 Bags, Queues, and Stacks
+* Queues: FIFO (`Quenes.java` & `QuenesArr.java`)
+* Stacks: LIFO (`Stacks.java` & `StacksArr.java`)
+* Bags: ...
+
+
+#### Aplication:
+Using stacks to implement a simple calculator: `DijkstraTwoStackAlgorithm.java`
+
 ### 1.4 Analysis of Algorithms
 Example: `ThreeSum.java`
+
 #### Running time
 
 Scientific method:
