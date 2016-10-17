@@ -1,4 +1,4 @@
-# Algorithms-notes
+# Algorithms Notes
 Notes and homework from reading Algorithms (4th edition)
 
 ## CHAPTER 1
