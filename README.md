@@ -1,9 +1,10 @@
 # Algorithms-notes
 Notes and homework from reading Algorithms (4th edition)
 
-## Chapter 1
+## CHAPTER 1
 
 ### 1.4 Analysis of Algorithms
+Example: `ThreeSum.java`
 #### Running time
 
 Scientific method:
@@ -42,5 +43,18 @@ Approach.
 Optimal algorithm.
 * Performance guarantee (to within a constant factor) for any input.
 * No algorithm can provide a better performance guarantee.
+
+### 1.5 Union-find
+#### Dynamic connectivity
+...
+
+#### Quick find
+`Quick_Find.java`
+
+#### Quick union
+`Quick_Union.java` & `Quick_Union_Improv.java`
+
+#### Application: Percolation
+`Percolation.java`
 
 
