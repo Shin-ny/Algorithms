@@ -3,7 +3,7 @@ Notes and homework from reading Algorithms (4th edition)
 
 ## CHAPTER 1
 
-## 1.3 Bags, Queues, and Stacks
+### 1.3 Bags, Queues, and Stacks
 * Queues: FIFO (`Quenes.java` & `QuenesArr.java`)
 * Stacks: LIFO (`Stacks.java` & `StacksArr.java`)
 * Bags: ...
