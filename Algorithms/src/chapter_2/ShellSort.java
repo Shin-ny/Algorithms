@@ -36,7 +36,7 @@ public class ShellSort {
 	}
 	
 	public static void main(String[] args) {
-		System.out.print("How many numbers you want to sort? ");
+		System.out.print("How many numbers do you want to sort? ");
 		Scanner in = new Scanner(System.in);
 		int num = in.nextInt();
 		System.out.println("The numbers:");
