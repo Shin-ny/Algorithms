@@ -1,5 +1,6 @@
 package chapter_2;
 
+
 import java.util.Scanner;
 
 //randomly shuffle a bunch of card
