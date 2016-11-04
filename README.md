@@ -1,5 +1,5 @@
-# Algorithms Notes
-Notes and homework from reading Algorithms (4th edition)
+# Algorithms
+Notes and homework from the book Algorithms (4th edition)
 
 ## CHAPTER 1
 
